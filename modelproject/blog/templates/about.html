@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<style>
+  body{
+    font-weight: 200;
+  }
+  .container{
+    height:1300px;
+  }
+  .about{
+    text-align: left;
+    width:1000px;
+    margin-left:300px
+  }
+  li{
+    font-weight:500;
+  }
+  a{
+    text-decoration: none;
+    color:gray
+  }
+
+</style>
+
+<div class="container"><br>
+<h1><b>ABOUT CODEMODE</b></h1>
+<br><hr>
+<img src="{% static 'about.jpg' %}" style="max-height:510px; float:left">
+<div class="about"><h3><b>Purpose</b></h3>
+&nbsp&nbsp I like to play songs with various instruments, and especially there are many songs that you can play with guitar.
+If you have passion to learn some simple guitar chords, you can enjoy your favorite songs with your own play.
+At first I just started to write the song list I learned in my note of my phone(like the picture you can see on the page), 
+but I wanted to write some chords information of the song and lyrics together. 
+And I thought that it will be great if I can distinguish the songs easily with their picture of album or etc.<br><br><br>
+<h3><b>Meaning</b></h3>
+&nbsp&nbspThis page is made by <a href="https://www.djangoproject.com/">django</a> (high-level Python web framework that encourages rapid development and clean, pragmatic design),
+so I thought that it will be the coding project for chords. CODE means that two words with similar pronounciation 
+(plus I think we can find our taste:code when we collect something continuously.), and MODE means passion. 
+Additionally about the logo of CODEMODE : I made a guitar-shaped logo using the curves of the alphabet(C-O-D-E-M-O-D-E).<br><br><br>
+<h3><b>Functions</b></h3>
+<li>INTRO</li>
+  There's a interaction page with lyrics of some songs and logos of CODEMODE.</li>
+<li>CRUD</li>
+  This is a kind of blog made by basic function of django : you can Create, Read, Update, Delete all posts!
+  After siginup & login, you can post your code(song) by click "New Post" on homepage and "POST" on nav-bar above every contents.
+  By clicking the picture or the name of the songs, you can go to detail page. Then if you're the creator of the page, you can update and delete in the page.
+  <li>ABOUT</li>
+  This page is about page.
+<li>MYCODE</li>
+  You can see only your postings by clicking this button.
+<li>GENRE</li>
+  If you click your favorite genre on the drop-box of GENRE, you'll see the song lists that are fit with your code.<br><br><br>
+<h3><b>REFERENCE</b></h3>
+&nbsp&nbsp Here are some links that can help your code time!
+<li><a href="https://www.all-guitar-chords.com/">Guitar Chords</a></li>
+<li><a href="https://cafe.naver.com/tongandtong">tongandtong : naver cafe</a></li>
+<li><a href="https://chordify.net/">chordify : instant chords for any song</a></li>
+<li><a href="https://www.youtube.com/user/GrabTheGT">GrabTheGuitar : simple and various songs</a></li>
+<li><a href="https://www.youtube.com/c/JinsanKim">Guitarist Jinsan Kim's youtube</a></li><br><br>
+<h3><b>OTHERS</b></h3>
+<li><a href="https://www.djangoproject.com/">DJANGO</a></li>
+<li><a href="https://www.instagram.com/likelion_hufs/">HUFS(SEOUL) LIKELION INSTAGRAM</li>
+<li><a href="https://github.com/ex-g">GITHUB</a></li><br>
+</div>
+<hr>
+</div>
+{% endblock %}

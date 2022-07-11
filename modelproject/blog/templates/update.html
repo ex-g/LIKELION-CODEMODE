@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>Update</h1>
+<a style="color:gray">(You can't update image and genre)</a><br><br>
+<form action="{% url 'blog:update' blog.id %}" method="POST">
+  {% csrf_token %}
+  title : <input type="text" name="title" value={{blog.title}}><br><br>
+  singer : <input type="text" name="singer" value={{blog.singer}}><br><br>
+  code : <input type="text" name="code" value={{blog.code}}><br><br>
+  lyrics : <textarea name="lyrics" cols="30" rows="10">{{blog.lyrics}}</textarea><br><br>
+  memo : <textarea name="memo" cols="30" rows="10">{{blog.memo}}</textarea><br><br>
+
+  <input type="submit" value="완료">
+</form>
+{% endblock %}

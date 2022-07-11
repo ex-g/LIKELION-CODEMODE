@@ -1,0 +1,123 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<style>
+  hr{
+    width:1200px;
+    margin-left:160px
+  }
+  .container{
+    width: 1200px;
+    background-color: black;
+    border-radius: 7px;
+  }
+  .lyrics{
+    overflow: scroll;
+    background-color: white;
+    width:600px;
+    height:400px;
+    margin-left:540px;
+    margin-right:40px;
+    border-radius: 20px;
+    padding:30px
+  }
+  .code{
+    background-color: white;
+    margin-left:540px;
+    width: 600px;
+  }
+  .memo{
+    background-color: white;
+    width:1110px;
+    margin-left:30px
+  }
+  .comment{
+    width:700px;
+    margin-left:420px;
+    padding:10px;
+    text-align: left;
+    border:solid gray 1px
+  }
+  .post_admin a{
+    text-decoration: none;
+    color:gray
+  }
+</style>
+  <body><br>
+    <h1><b>{{blog.title}}</h1>
+    <b>{{ blog.singer }}</b><br>
+    작성자 : {{blog.user.username}}<br>
+    날짜: {{blog.pub_date}}<br><br>
+    <a style="font-size:20px; color:gray">{{blog.genre}}</a><br>
+    <hr><br><br>
+    <div class="container">
+    {% if blog.image %}
+    <img src="{{blog.image.url}}" alt="" style="height:470px; float:left; margin-top: 24px; margin-left:30px">
+    {% else %}
+    <img src="{% static 'music.png' %}" alt="" style="height:470px; float:left; margin-top: 24px; margin-left:30px">
+    {% endif %}<br>
+    
+    <div class="code">
+    <b>code<br>
+    {% if blog.code %}
+    {{ blog.code }}</b>
+    {% endif %}<br></div><br>
+
+    <div class="lyrics">
+    {% if blog.lyrics %}
+    <b>lyrics</b><br><br><pre><a style="font-family:Gill Sans">{{ blog.lyrics }}</a></pre>
+    {% else %}
+    <b>lyrics</b><br><br>등록된 가사 없음
+    {% endif %}</div><br>
+
+    <div class="memo">
+    {% if blog.memo %}<br>
+    <b>MEMO</b><br><br><pre><a style="font-family:Gill Sans">{{ blog.memo }}</a></pre><br><br>
+    {% endif %}</div><br>
+    </div>
+  <br><br>
+  <div class="post_admin">
+  {% if request.user == blog.user %}
+  <a href="{% url 'blog:update' blog.id %}">수정하기</a>
+  <a href="{% url 'blog:home' %}">돌아가기</a>
+  <a href="{% url 'blog:delete' blog.id %}">삭제하기</a>
+  {% endif %}
+</div>
+  <hr>
+  <div class="comments">
+    <br><br>
+    <form action="{% url 'blog:comments_create' blog.id %}" method="POST">
+      {% csrf_token %}
+      {% if request.user.is_authenticated %}
+      <b>{{ request.user }}</b> |
+      {% else %}
+      <b>익명</b> |
+      {% endif %}
+      {{ comment_form }}
+      <input type="submit" value = "댓글 입력">
+      </form>
+      {% if comments %}
+      <br><br>
+
+      총 {{ comments | length }} 개의 댓글이 있습니다.
+      {% endif %}
+      <br><br>
+
+    {% for comment in comments %}
+    <div class="comment">
+
+    {% if request.user == comment.user %}
+    <p style="font-size:12px"><b><span style="color:blue">{{comment.user}} (나)</b></span> | {{comment.created_time}}
+    <a href="{% url 'blog:comments_delete' blog.id comment.id %}" style="font-size: 12; color:gray; text-decoration: none; float:right">삭제&nbsp</a></p>
+    {% elif comment.user %}
+    <p style="font-size:12px"><b>{{comment.user}}</b> | {{comment.created_time}}</p>
+    {% else %}
+    <p style="font-size:12px"><b>익명</b> | {{comment.created_time}}</p>
+    {% endif %}
+
+    {{ comment.content }}
+    <br></div><br>
+    {% endfor %}
+    </div>
+{% endblock %}
+  </body>

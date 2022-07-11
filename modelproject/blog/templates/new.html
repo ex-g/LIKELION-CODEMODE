@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block content %}
+<style>
+  .unknown a{
+    text-decoration: none;
+    color: gray
+  }
+</style>
+{% if user.is_authenticated %}
+<body><br>
+  <h1>Keep Your Code</h1><br>
+  <form action="{% url 'blog:new' %}" method="post" enctype="multipart/form-data">
+      {%csrf_token%}
+      {{ form.as_p }}
+      <button type='submit'>작성하기</button>
+  </form>
+</body>
+{% else %}
+<body>
+  <br><br>
+  <div class="unknown">
+  <h2>글을 쓰려면 로그인해야 합니다!</h2>
+  <h5>Please login before post a new code, or sign up!</h5><br>
+  <a href="{% url 'account:login' %}">로그인하기</a>
+  <a href="{% url 'blog:home' %}">돌아가기</a><br><br>
+  회원이 아니신가요?
+  <a href="{% url 'account:signup' %}">회원가입하기</a>
+</div>
+</body>
+{% endif %}
+{% endblock %}

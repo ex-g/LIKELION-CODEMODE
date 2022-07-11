@@ -1,0 +1,22 @@
+{% load static %}
+  <link href="{% static 'intro.css' %}" rel="stylesheet">
+<body>
+
+
+  <div class="wrap">
+    <div class="links">
+    <span style="font-family:Georgia; font-size:1.5rem"><b><i>Find your code with <a href="{% url 'blog:home' %}" style="color:black">CODEMODE.</i></b></span><br><br>
+    <a href="{% url 'blog:home' %}">Go to Home | </a>
+    <a href="{% url 'blog:about' %}">About | </a>
+    <a href="{% url 'account:login' %}">Login | </a>
+    <a href="{% url 'account:signup' %}">Signup </a><br><br><br><br><br></div>
+
+    <a href="{% url 'blog:home' %}" style="text-decoration:none"><img src="{% static 'logo.png' %}" style="max-width:300px">
+    <img src="{% static 'codemode.png' %}" style="max-width:300px"></a>
+    <br><br><br></div>
+    <div class="box"></div>
+    <p id="dynamic" class="lg-text"></p>
+  <script src="{% static 'intro.js' %}"></script>
+
+
+</body>
